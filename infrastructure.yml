@@ -1,0 +1,33 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Simple infrastructure with VPC and EC2 instance in eu-north-1
+
+Resources:
+  MyVPC:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: 10.0.0.0/16
+      EnableDnsSupport: true
+      EnableDnsHostnames: true
+      Tags:
+        - Key: Name
+          Value: MyDevOpsVPC
+
+  MySubnet:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref MyVPC
+      CidrBlock: 10.0.1.0/24
+      AvailabilityZone: eu-north-1a
+      Tags:
+        - Key: Name
+          Value: MyDevOpsSubnet
+
+  MyEC2Instance:
+    Type: AWS::EC2::Instance
+    Properties:
+      ImageId: ami-0b6a9e6e6b8e1e1e1 # Amazon Linux 2023 AMI (eu-north-1)
+      InstanceType: t3.micro
+      SubnetId: !Ref MySubnet
+      Tags:
+        - Key: Name
+          Value: MyFirstDevOpsInstance
