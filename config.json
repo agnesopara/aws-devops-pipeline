@@ -1,0 +1,4 @@
+{
+  "Capabilities": ["CAPABILITY_IAM", "CAPABILITY_NAMED_IAM"],
+  "Parameters": {}
+}
